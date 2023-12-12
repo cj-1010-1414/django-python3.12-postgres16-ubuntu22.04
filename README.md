@@ -7,19 +7,19 @@ Ini cara memulai proyek Django Framework menggunakan Python 3.12 di Ubuntu 22.04
 Lakukan di terminal sebaris demi sebaris!
 
 ```
-sudo apt update
-sudo apt upgrade
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install python3.12
+kamu@komputermu:~$ sudo apt update
+kamu@komputermu:~$ sudo apt upgrade
+kamu@komputermu:~$ sudo apt install software-properties-common
+kamu@komputermu:~$ sudo add-apt-repository ppa:deadsnakes/ppa
+kamu@komputermu:~$ sudo apt update
+kamu@komputermu:~$ sudo apt install python3.12
 ```
 
 Konfirmasi instalasi dengan:
 
 ```
-python3.12 -V
-pip3.12 -V
+kamu@komputermu:~$ python3.12 -V
+kamu@komputermu:~$ pip3.12 -V
 ```
 
 ## 2. Instalasi Django
@@ -28,21 +28,63 @@ Lakukan perintah berikut baris demi baris!
 
 ```
 # Bikin direktori, nama terserah. Dan masuk ke direktori tersebut
-mkdir django-project
-cd django-project
+kamu@komputermu:~$ mkdir django-project
+kamu@komputermu:~$ cd django-project
 
 # buat .env
-python3.12 -m venv .env
+kamu@komputermu:~$ python3.12 -m venv .env
 
 # aktifkan .env
-source .env/bin/activate
+kamu@komputermu:~$ source .env/bin/activate
 
 # Instalasi django, pastikan sudah muncul ada (.env) di terminal setelah perintah di atas
-python -m pip install Django
+(.env)kamu@komputermu:~$ python -m pip install Django
 
 # Install driver untuk PostgreSQL
-python -m pip install psycopg
+(.env)kamu@komputermu:~$ python -m pip install psycopg
 ```
 
-## 3 Instalasi PostgreSQL
+## 3. Instalasi PostgreSQL 16
 
+Ini adalah instalasi Postgres yang digunakan secara lokal. Tidak menerima koneksi jarak jauh dari IP berbeda.
+
+```
+kamu@komputermu:~$ sudo apt install gnupg2 wget vim
+kamu@komputermu:~$ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+kamu@komputermu:~$ curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+kamu@komputermu:~$ sudo apt update
+
+# instalasi Postgres
+kamu@komputermu:~$ sudo apt install postgresql-16 postgresql-contrib-16
+
+# mulai servis
+kamu@komputermu:~$ sudo systemctl start postgresql
+kamu@komputermu:~$ sudo systemctl enable postgresql
+
+# cek versi
+kamu@komputermu:~$ psql --version
+
+# Buka koneksi sebagai pengguna root
+kamu@komputermu:~$ sudo -u postgres psql
+
+# Ganti passwordnya
+postgres=# ALTER USER postgres PASSWORD 'PassworMuSendiri@69';
+
+# Buatkan database untuk django.
+create database namadatabase;
+
+# Bikin pengguna database 'namadatabase'
+create user namapengguna with encrypted password 'passwordpengguna';
+
+# Berikan perizinan 'namapengguna' untuk menggunakan 'namadatabase'
+grant all on database namadatabase to namapengguna;
+alter database namadatabase owner to namapengguna;
+grant usage, create on schema public to namapengguna;
+
+# berikan akses django untuk membuat database untuk tes
+alter user django createdb;
+```
+
+## 4. Penutup
+
+Beres!
