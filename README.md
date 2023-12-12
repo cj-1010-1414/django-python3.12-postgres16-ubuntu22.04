@@ -71,18 +71,18 @@ kamu@komputermu:~$ sudo -u postgres psql
 postgres=# ALTER USER postgres PASSWORD 'PassworMuSendiri@69';
 
 # Buatkan database untuk django.
-create database namadatabase;
+postgres=# create database namadatabase;
 
 # Bikin pengguna database 'namadatabase'
-create user namapengguna with encrypted password 'passwordpengguna';
+postgres=# create user namapengguna with encrypted password 'passwordpengguna';
 
 # Berikan perizinan 'namapengguna' untuk menggunakan 'namadatabase'
-grant all on database namadatabase to namapengguna;
-alter database namadatabase owner to namapengguna;
-grant usage, create on schema public to namapengguna;
+postgres=# grant all on database namadatabase to namapengguna;
+postgres=# alter database namadatabase owner to namapengguna;
+postgres=# grant usage, create on schema public to namapengguna;
 
 # berikan akses django untuk membuat database untuk tes
-alter user django createdb;
+postgres=# alter user django createdb;
 ```
 
 ## 4. Penutup
