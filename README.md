@@ -1,6 +1,6 @@
 # Setting Django Menggunakan Python 3.12 di Ubuntu 22.04
 
-Ini cara memulai proyek Django Framework menggunakan Python 3.12 di Ubuntu 22.04 (Zorin OS 16).
+Ini cara memulai proyek Django Framework menggunakan Python 3.12 di Ubuntu 22.04 (Zorin OS 16) dengan database PostgreSQL 16.
 
 ## 1. Instalasi Python 3.12
 
