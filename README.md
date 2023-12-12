@@ -1,0 +1,1 @@
+# Setting-Django-Menggunakan-Python-3.12-di-Ubuntu-22.04
